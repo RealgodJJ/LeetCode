@@ -1,4 +1,4 @@
-package com.company.similartree_100;
+package com.company.binarytree.similartree_100;
 
 
 public class SimilarTree {
