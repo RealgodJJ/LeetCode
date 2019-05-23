@@ -10,7 +10,7 @@ public class AddTwoNumbers {
         }
     }
 
-    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+    ListNode addTwoNumbers(ListNode l1, ListNode l2) {
         ListNode dummyHead = new ListNode(0);
         ListNode p = l1, q = l2, curr = dummyHead;
         int carry = 0;//表达的是向高位进位

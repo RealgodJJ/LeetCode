@@ -64,7 +64,7 @@ public class LengthOfLongestSubString {
 //        String s = "bbb";
 //        String s = "dvdf";
         String s = "tmmzuxtx";
-        int length = lengthOfLongestSubString(s);
+        int length = lengthOfLongestSubStringStupid(s);
         System.out.println(length);
     }
 }
