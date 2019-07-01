@@ -38,6 +38,7 @@ public class TheSumOfThreeNumbers {
                         resultList.add(Arrays.asList(nums[i], nums[left], nums[right]));
                         while (left < right && nums[left] == nums[left + 1]) left++;
                         while (left < right && nums[right] == nums[right - 1]) right--;
+                        //找到一组答案之后，继续向后遍历寻找新的答案
                         left++;
                         right--;
                     } else if (nums[left] + nums[right] < sum) {
