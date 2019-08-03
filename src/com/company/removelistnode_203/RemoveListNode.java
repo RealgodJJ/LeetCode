@@ -1,4 +1,4 @@
-package com.company.RemoveListNode_203;
+package com.company.removelistnode_203;
 
 public class RemoveListNode {
     private static class ListNode {
@@ -79,6 +79,52 @@ public class RemoveListNode {
         return dummyHead.next;
     }
 
+    private static ListNode removeElementsWithRecursion(ListNode head, int val, int depth) {
+        String depthString = generateDepthString(depth);
+
+        System.out.print(depthString);
+        System.out.println("Call remove " + val + " in " + head);
+
+        if (head == null) {
+            System.out.print(depthString);
+            System.out.println("Return: " + head);
+            return null;
+        }
+
+        ListNode result = removeElementsWithRecursion(head.next, val, depth + 1);
+        System.out.print(depthString);
+        System.out.println("After remove " + val + ": " + result);
+
+        ListNode resultNode;
+        if (head.val == val) {
+            resultNode = result;
+        } else {
+            head.next = result;
+            resultNode = head;
+        }
+        System.out.print(depthString);
+        System.out.println("Return: " + resultNode);
+
+        return resultNode;
+//        return head.val == val ? head.next : head;
+
+//        int result = = removeElementsWithRecursion(head.next, val);
+//        if (head.val == val)
+//            return result;
+//        else {
+//            head.next = result;
+//            return head;
+//        }
+    }
+
+    private static String generateDepthString(int depth) {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        for (int i = 0; i < depth; i++) {
+            stringBuilder.append("--");
+        }
+        return stringBuilder.toString();
+    }
 
     public static void main(String[] args) {
         ListNode listNode = new ListNode(1);
@@ -104,11 +150,20 @@ public class RemoveListNode {
             prev = prev.next;
         }
 
+        System.out.println("===== 下一个创建链表的方式 =====");
         int[] nums = {1, 2, 6, 3, 4, 5, 6};
         ListNode listNode1 = new ListNode(nums);
 
         removeElementsWithDummyHead(listNode1, 6);
         System.out.println(listNode1);
+
+        System.out.println("===== 下一个创建链表的方式2 =====");
+        int[] array = {1, 2, 6, 3, 4, 5, 6};
+        ListNode listNode2 = new ListNode(array);
+
+        removeElementsWithRecursion(listNode2, 6, 0);
+        System.out.println(listNode2);
+
 
     }
 }
