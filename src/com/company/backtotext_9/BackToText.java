@@ -1,7 +1,5 @@
 package com.company.backtotext_9;
 
-import com.company.addtwonumbers_2.AddTwoNumbers;
-
 public class BackToText {
     private static boolean isPalindrome(int x) {
         int temp = x;

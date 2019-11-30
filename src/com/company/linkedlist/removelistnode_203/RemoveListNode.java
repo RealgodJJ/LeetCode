@@ -1,4 +1,4 @@
-package com.company.removelistnode_203;
+package com.company.linkedlist.removelistnode_203;
 
 public class RemoveListNode {
     private static class ListNode {

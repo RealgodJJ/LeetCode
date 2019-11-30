@@ -1,4 +1,4 @@
-package com.company.mergetwolinkledists_21;
+package com.company.linkedlist.mergetwolinkledists_21;
 
 public class MergeTwoLinkedLists {
     private static class ListNode {
