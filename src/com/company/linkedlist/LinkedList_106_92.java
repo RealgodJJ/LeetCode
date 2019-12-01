@@ -85,17 +85,46 @@ public class LinkedList_106_92 {
         return prev;
     }
 
-    //92.反转链表的一部分
-//    private static Node reverseBetween(Node head, int m, int n) {
-//        if (head == null || head.next == null) return head;
-//
-////        int length = n - m + 1;
-//        m--;
-//        n--;
-//
-//        Node newHead = null;
-//        Node cur = head;
-//    }
+    //92.反转链表的一部分（反转链表4的改进）
+    private static Node reverseBetween(Node head, int m, int n) {
+        if (head == null || head.next == null) return head;
+
+        if (m > n || m < 1) return head;
+        Node cur = head;
+        Node top = null, end = null;
+        int len = 0;
+        // 找到前一个节点 top，和后一个节点 end
+        while (cur != null) {
+            len++;
+            top = (len == (m - 1)) ? cur : top;
+            end = (len == (n + 1)) ? cur : end;
+            cur = cur.next;
+        }
+
+        if (len == 1) return head;
+        Node nodeH = top == null ? head : top.next;
+        /*Node nodeH;
+        if (top == null)
+            nodeH = head;
+        else
+            nodeH = top.next;*/
+
+        Node next;
+        len = n - m;    //此处的长度是用来计算两个节点之间的
+        // 进行正常的链表反转
+        while (len >= 0) {
+            next = nodeH.next;
+            // 将反转后的链表的最后一个节点链接到 end 上
+            nodeH.next = end;
+            end = nodeH;
+            nodeH = next;
+            len--;
+        }
+        // 将反转后的链表链接到 top 上
+        if (top == null) return end;
+        else top.next = end;
+        return head;
+    }
 
     public static void main(String[] args) {
         Node head = new Node(1);
@@ -110,7 +139,7 @@ public class LinkedList_106_92 {
 
         Node result = reverseLinkedListNew3(head);
 
-//        Node newResult = reverseBetween(result, 3, 5);
+        Node newResult = reverseBetween(result, 2, 3);
 
         //创建指针遍历打印
         Node temp = result;
@@ -118,12 +147,13 @@ public class LinkedList_106_92 {
             System.out.println(temp.val);
             temp = temp.next;
         }
+        System.out.println();
 
         //创建指针遍历打印
-//        Node newTemp = newResult;
-//        while (newTemp != null) {
-//            System.out.println(newTemp.val);
-//            newTemp = newTemp.next;
-//        }
+        Node newTemp = newResult;
+        while (newTemp != null) {
+            System.out.println(newTemp.val);
+            newTemp = newTemp.next;
+        }
     }
 }
