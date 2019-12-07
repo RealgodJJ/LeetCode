@@ -1,7 +1,5 @@
 package com.company.linkedlist;
 
-import java.util.LinkedList;
-
 public class LinkedList_106_92 {
     static class Node {
         int val;
@@ -14,7 +12,7 @@ public class LinkedList_106_92 {
 
 
     //反转链表1（有新链表作为空间辅助）
-    static Node reverseLinkedList(Node head) {
+    private static Node reverseLinkedList(Node head) {
         if (head == null || head.next == null) return head;
 
         Node reHead = null;//新链表
@@ -85,6 +83,44 @@ public class LinkedList_106_92 {
         return prev;
     }
 
+    // 反转链表5（利用递归的方式）
+    private static Node reverseLinkedListNew4(Node head) {
+        if (head == null || head.next == null) return head;
+
+        Node last = reverseLinkedListNew4(head.next);
+        head.next.next = head;
+        head.next = null;
+        return last;
+    }
+
+    //92.反转链表的一部分（递归的方式，找到反转部分的第一节点和最后节点两两交换，直到两个指针指向最中间位置）
+    private static Node reverseBetweenNew(Node head, int m, int n) {
+        if (m == 1)
+            return reverseN(head, n);
+
+        head.next = reverseBetweenNew(head.next, m - 1, n - 1);
+        return head;
+    }
+
+    private static Node successor = null;
+
+    // 反转以 head 为起点的 n 个节点，返回新的头结点
+    private static Node reverseN(Node head, int n) {
+        if (n == 1) {
+            // 记录第 n + 1 个节点
+            successor = head.next;
+            return head;
+        }
+        // 以 head.next 为起点，需要反转前 n - 1 个节点
+        Node last = reverseN(head.next, n - 1);
+
+        head.next.next = head;
+        // 让反转之后的 head 节点和后面的节点连起来
+        head.next = successor;
+        return last;
+    }
+
+
     //92.反转链表的一部分（反转链表4的改进）
     private static Node reverseBetween(Node head, int m, int n) {
         if (head == null || head.next == null) return head;
@@ -103,12 +139,6 @@ public class LinkedList_106_92 {
 
         if (len == 1) return head;
         Node nodeH = top == null ? head : top.next;
-        /*Node nodeH;
-        if (top == null)
-            nodeH = head;
-        else
-            nodeH = top.next;*/
-
         Node next;
         len = n - m;    //此处的长度是用来计算两个节点之间的
         // 进行正常的链表反转
@@ -126,6 +156,55 @@ public class LinkedList_106_92 {
         return head;
     }
 
+    //将两个链表进行合并排序(递归)
+    private static Node mergeListNew(Node list1, Node list2) {
+        if (list1 == null) return list2;
+        if (list2 == null) return list1;
+
+        Node resultNode;
+        if (list1.val <= list2.val) {
+            resultNode = new Node(list1.val);
+            list1 = list1.next;
+        } else {
+            resultNode = new Node(list2.val);
+            list2 = list2.next;
+        }
+
+        resultNode.next = mergeListNew(list1, list2);
+        return resultNode;
+    }
+
+    //将两个链表进行合并排序(迭代)
+    private static Node mergeList(Node list1, Node list2) {
+        if (list1 == null) return list2;
+        if (list2 == null) return list1;
+
+        Node dummyNode = new Node(0);
+        Node tempNode = dummyNode;
+        while (list1 != null && list2 != null) {
+            if (list1.val <= list2.val) {
+                tempNode.next = new Node(list1.val);
+                //TODO: 以下方式改变list1的结构
+//                tempNode.next = list1;
+                list1 = list1.next;
+            } else {
+                tempNode.next = new Node(list2.val);
+                //TODO: 以下方式改变list2的结构
+//                tempNode.next = list2;
+                list2 = list2.next;
+            }
+            tempNode = tempNode.next;
+        }
+
+        if (list1 != null) {
+            tempNode.next = list1;
+        } else {
+            tempNode.next = list2;
+        }
+
+        return dummyNode.next;
+    }
+
     public static void main(String[] args) {
         Node head = new Node(1);
         Node cur = head;
@@ -137,9 +216,26 @@ public class LinkedList_106_92 {
         cur = cur.next;
         cur.next = new Node(5);
 
-        Node result = reverseLinkedListNew3(head);
+        Node newHead = new Node(-3);
+        Node newCur = newHead;
+        newCur.next = new Node(0);
+        newCur = newCur.next;
+        newCur.next = new Node(3);
+        newCur = newCur.next;
+        newCur.next = new Node(6);
+        newCur = newCur.next;
+        newCur.next = new Node(7);
 
-        Node newResult = reverseBetween(result, 2, 3);
+        Node resultNode = mergeListNew(head, newHead);
+
+//        Node l1 = new Node(1);
+//        l1.next = new Node(2);
+//        l1.next.next = new Node(4);
+//        Node l2 = new Node(1);
+//        l2.next = new Node(3);
+//        l2.next.next = new Node(4);
+
+        Node result = reverseLinkedList(head);
 
         //创建指针遍历打印
         Node temp = result;
@@ -150,10 +246,17 @@ public class LinkedList_106_92 {
         System.out.println();
 
         //创建指针遍历打印
-        Node newTemp = newResult;
+        Node newTemp = reverseBetweenNew(result, 2, 3);
         while (newTemp != null) {
             System.out.println(newTemp.val);
             newTemp = newTemp.next;
+        }
+
+        System.out.println("==========合并链表===========");
+        Node tempNode = resultNode;
+        while (tempNode != null) {
+            System.out.println(tempNode.val);
+            tempNode = tempNode.next;
         }
     }
 }
