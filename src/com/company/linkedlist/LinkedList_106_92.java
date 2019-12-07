@@ -120,7 +120,6 @@ public class LinkedList_106_92 {
         return last;
     }
 
-
     //92.反转链表的一部分（反转链表4的改进）
     private static Node reverseBetween(Node head, int m, int n) {
         if (head == null || head.next == null) return head;
