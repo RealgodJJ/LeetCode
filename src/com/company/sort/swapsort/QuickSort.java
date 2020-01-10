@@ -1,6 +1,6 @@
-package com.company.sort;
+package com.company.sort.swapsort;
 
-class QuickSort {
+public class QuickSort {
     long quickSort(int[] nums, int left, int right) {
         if (nums == null || nums.length <= 1 || left >= right)
             return 0;
@@ -38,10 +38,10 @@ class QuickSort {
         return left;
     }
 
-    void newQuickSort(int[] nums, int left, int right) {
+    public void newQuickSort(int[] nums, int left, int right) {
         if (nums == null || nums.length <= 1 || left >= right) return;
 
-        int l = left, r = right, key = nums[left];
+        int l = left, r = right, key = nums[l];
         while (l < r) {
             while (nums[r] >= key && l < r)
                 r--;

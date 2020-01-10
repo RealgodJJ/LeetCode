@@ -40,13 +40,8 @@ public class BinaryTree {
         if (root == null) return;
 
         System.out.println(root.val);
-        if (root.left != null) {
-            preOrderTraversal(root.left);
-        }
-
-        if (root.right != null) {
-            preOrderTraversal(root.right);
-        }
+        preOrderTraversal(root.left);
+        preOrderTraversal(root.right);
     }
 
     //深度遍历二叉树(使用栈，迭代)

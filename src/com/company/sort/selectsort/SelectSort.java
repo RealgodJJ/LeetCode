@@ -1,7 +1,7 @@
-package com.company.sort;
+package com.company.sort.selectsort;
 
-class SelectSort {
-    long selectSort(int[] nums) {
+public class SelectSort {
+    public long selectSort(int[] nums) {
         if (nums == null || nums.length <= 1)
             return 0;
 

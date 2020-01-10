@@ -1,8 +1,8 @@
-package com.company.sort;
+package com.company.sort.insertsort;
 
-class InsertSort {
+public class InsertSort {
 
-    long insertSort(int[] nums) {
+    public long insertSort(int[] nums) {
         if (nums == null || nums.length <= 1)
             return 0;
 
