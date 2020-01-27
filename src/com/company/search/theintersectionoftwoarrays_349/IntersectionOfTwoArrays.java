@@ -1,4 +1,4 @@
-package com.company.theintersectionoftwoarrays_349;
+package com.company.search.theintersectionoftwoarrays_349;
 
 import java.util.*;
 

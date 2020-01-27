@@ -1,4 +1,4 @@
-package com.company.theintersectionoftwoarrays_350;
+package com.company.search.theintersectionoftwoarrays_350;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -54,6 +54,7 @@ public class IntersectionOfTwoArrays {
         return res;
     }
 
+    //先将两个数组进排序，再使用双指针同时遍历两个数组
     private static int[] intersect_2(int[] nums1, int[] nums2) {
         Arrays.sort(nums1);
         Arrays.sort(nums2);
@@ -82,7 +83,7 @@ public class IntersectionOfTwoArrays {
         int[] nums2 = {9, 4, 9, 8, 4};
 
 
-        int[] result = intersect_1(nums1, nums2);
+        int[] result = intersect_2(nums1, nums2);
         for (int res :result) {
             System.out.println(res);
         }

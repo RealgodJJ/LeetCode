@@ -1,4 +1,4 @@
-package com.company.TheSumOfTheNearestThreeNumbers_16;
+package com.company.search.thesumofthenearestthreenumbers_16;
 
 import java.util.Arrays;
 
@@ -10,6 +10,26 @@ public class TheSumOfTheNearestThreeNumbers {
         for (int i = 0; i < nums.length - 2; i++) {
             if (i == 0 || nums[i] != nums[i - 1]) {
                 int left = i + 1, right = nums.length - 1;
+
+                //判断在第一个值固定的情况下，最小值是否大于且更接近目标结果，直接返回
+                int min = nums[i] + nums[left] + nums[left + 1];
+                if (min > target) {
+                    if (Math.abs(min - target) < Math.abs(result - target)) {
+                        result = min;
+                        return result;
+                    }
+                    continue;   //TODO：不明白continue反而算法用时会短
+//                    break;
+                }
+
+                //判断在第一个值固定的情况下，最大值是否更接近目标结果
+                int max = nums[i] + nums[right] + nums[right - 1];
+                if (max < target) {
+                    if (Math.abs(max - target) < Math.abs(result - target))
+                        result = max;
+                    continue;
+                }
+
                 while (left < right) {
                     int threeSum = nums[left] + nums[right] + nums[i];
                     if (Math.abs(result - target) > Math.abs(threeSum - target)) {
